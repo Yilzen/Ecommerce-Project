@@ -114,8 +114,8 @@ $twig->addFunction(new TwigFunction('trans', function (string $key, array $param
 }));
 
 
-//DI injection
-$basePath = '/Artlet';
+//DI injection ///Artlet
+$basePath = '';
 
 $container = new \DI\Container();
 $container -> set(Environment::class, $twig);
