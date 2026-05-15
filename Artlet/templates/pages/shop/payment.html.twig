@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Payment - Artlet{% endblock %}
+
+{% block content %}
+
+<div style="max-width:500px; margin:50px auto; padding:20px; border:1px solid #ddd; border-radius:10px; background:white;">
+
+    <h2 style="text-align:center; margin-bottom:20px;">Payment Details</h2>
+
+    {% if error %}
+        <div style="background:#ffdddd; padding:10px; margin-bottom:15px; border-radius:5px; color:#a00;">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <form method="POST" action="{{ basePath }}/payment">
+
+        {# CARD TYPE #}
+        <div style="margin-bottom:15px;">
+            <label>Card Type</label>
+            <select name="card_type" required style="width:100%; padding:10px; margin-top:5px;">
+                <option value="">Select card type</option>
+                <option value="visa">Visa</option>
+                <option value="mastercard">MasterCard</option>
+                <option value="amex">American Express</option>
+            </select>
+        </div>
+
+        {# CARD NUMBER #}
+        <div style="margin-bottom:15px;">
+            <label>Card Number</label>
+            <input 
+                type="text" 
+                name="card_number" 
+                maxlength="19"
+                placeholder="1234 5678 9012 3456"
+                required
+                style="width:100%; padding:10px; margin-top:5px;"
+            >
+        </div>
+
+        {# CARD HOLDER NAME #}
+        <div style="margin-bottom:15px;">
+            <label>Card Holder Name</label>
+            <input 
+                type="text" 
+                name="card_name" 
+                required
+                style="width:100%; padding:10px; margin-top:5px;"
+            >
+        </div>
+
+        {# EXPIRY DATE #}
+        <div style="display:flex; gap:10px; margin-bottom:15px;">
+            <div style="flex:1;">
+                <label>Expiry Month</label>
+                <input 
+                    type="number" 
+                    name="exp_month" 
+                    min="1" max="12"
+                    required
+                    style="width:100%; padding:10px; margin-top:5px;"
+                >
+            </div>
+
+            <div style="flex:1;">
+                <label>Expiry Year</label>
+                <input 
+                    type="number" 
+                    name="exp_year" 
+                    min="2026"
+                    required
+                    style="width:100%; padding:10px; margin-top:5px;"
+                >
+            </div>
+        </div>
+
+        {# CVV #}
+        <div style="margin-bottom:20px;">
+            <label>CVV</label>
+            <input 
+                type="password" 
+                name="cvv" 
+                maxlength="3"
+                required
+                style="width:100%; padding:10px; margin-top:5px;"
+            >
+        </div>
+
+        {# CONFIRM BUTTON #}
+        <button type="submit"
+                style="width:100%; padding:12px; background:orchid; color:white; border:none; border-radius:5px; font-size:16px;">
+            Confirm Payment
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

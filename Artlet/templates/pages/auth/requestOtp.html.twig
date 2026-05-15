@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Verify Account - Artlet{% endblock %}
+
+{% block content %}
+
+<div class="auth-container">
+
+    <div class="auth-box">
+
+        <h2>Scan QR Code</h2>
+
+        <p style="text-align:center;">
+            Scan this QR code with your authenticator app.
+        </p>
+
+        <div style="display:flex; justify-content:center; margin:20px 0;">
+            <img src="{{ qr_code }}" alt="OTP QR Code" style="width:180px; height:180px;">
+        </div>
+
+        <form method="GET" action="{{ basePath }}/login/verify" style="display:flex; justify-content:center;">
+            <button type="submit">Continue</button>
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home Admin - Artlet{% endblock %}
+
+{% block content %}
+
+{% if user %}
+
+<div style="padding: 30px;">
+
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px;">
+        <h1 id="pageTitle">Art Catalog</h1>
+
+        <button id="viewToggleBtn"
+                type="button"
+                style="background:#333; color:white; border:none; padding:10px 15px; border-radius:5px;">
+            Switch View
+        </button>
+    </div>
+
+    <div id="artView">
+
+        <h2>Artworks</h2>
+
+        <div style="margin: 20px 0; display: flex; gap: 10px;">
+
+            <input type="text"
+                   id="searchInput"
+                   placeholder="Search artworks..."
+                   style="flex:1; padding:10px; border:1px solid #ccc; border-radius:5px;">
+
+            <select id="categoryFilter" style="padding:10px; border-radius:5px;">
+                <option value="">All Categories</option>
+                <option value="digital">Digital</option>
+                <option value="painting">Painting</option>
+                <option value="photography">Photography</option>
+            </select>
+
+            <button id="searchBtn"
+                    style="background:orchid; color:white; border:none; padding:10px 15px; border-radius:5px;">
+                Search
+            </button>
+
+        </div>
+
+        <div id="artGrid"
+             style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
+
+            {% for art in artworks %}
+                <a href="{{ basePath }}/art/{{ art.id }}" style="text-decoration:none; color:inherit;">
+                    <div class="art-card"
+                         data-title="{{ art.title }}"
+                         data-category="digital"
+                         style="border:1px solid #ddd; padding:10px; border-radius:8px;">
+
+                        <h3>{{ art.title }}</h3>
+                        <p>{{ art.description }}</p>
+
+                    </div>
+                </a>
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <div id="userView" style="display:none; margin-top:20px;">
+
+        <h2>Users</h2>
+
+        <input type="text"
+               id="userSearchInput"
+               placeholder="Search users..."
+               style="width:100%; padding:10px; border:1px solid #ccc; border-radius:5px; margin-bottom:15px;">
+
+        <div id="userList"
+             style="display:grid; grid-template-columns:repeat(3,1fr); gap:15px;">
+        </div>
+
+    </div>
+
+</div>
+
+{% endif %}
+
+{% endblock %}
+
+{% block javascript %}
+<script src="{{ basePath }}/assets/app.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const btn = document.getElementById('viewToggleBtn');
+    const artView = document.getElementById('artView');
+    const userView = document.getElementById('userView');
+    const title = document.getElementById('pageTitle');
+
+    let artMode = true;
+
+    btn?.addEventListener('click', () => {
+        artMode = !artMode;
+
+        artView.style.display = artMode ? 'block' : 'none';
+        userView.style.display = artMode ? 'none' : 'block';
+
+        title.innerText = artMode ? 'Art Catalog' : 'User Search';
+    });
+
+});
+</script>
+
+{% endblock %}

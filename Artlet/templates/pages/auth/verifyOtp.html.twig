@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Enter Code - Artlet{% endblock %}
+
+{% block content %}
+
+<div class="auth-container">
+
+    <form method="POST" action="{{ basePath }}/login/verify" class="auth-box">
+
+        <h2>Enter Verification Code</h2>
+
+        {% if error %}
+            <p style="color: var(--color-error); text-align:center;">
+                Invalid code. Try again.
+            </p>
+        {% endif %}
+
+        <div class="form-group">
+            <label>6-digit Code</label>
+            <input type="text" name="code" maxlength="6" required>
+        </div>
+
+        <button type="submit">Verify</button>
+
+    </form>
+
+</div>
+
+{% endblock %}

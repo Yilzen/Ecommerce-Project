@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Delete Profile - Artlet{% endblock %}
+
+{% block content %}
+
+<div class="auth-container">
+
+    <form method="POST" action="{{ basePath }}/profile/delete" class="auth-box">
+
+        <h2>Delete Profile</h2>
+
+        <p style="color: red; text-align: center;">
+            This action is permanent. Please confirm your password to continue.
+        </p>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password" required>
+        </div>
+
+        {% if error %}
+            <div class="alert-error">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        <br>
+
+        <button type="submit" style="background: red; color: white;">
+            Delete Account
+        </button>
+
+        <p class="auth-link">
+            <a href="{{ basePath }}/profile">Cancel</a>
+        </p>
+
+    </form>
+
+</div>
+
+{% endblock %}

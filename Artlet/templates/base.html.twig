@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Artlet{% endblock %}</title>
+    <link rel="stylesheet" href="{{ basePath }}/assets/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <nav style="background-color: orchid;">
+        <div style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 20px;
+        ">
+
+            <h1 style="margin: 0;">
+                {% if user and user.username == 'admin' %}
+                    <a href="{{ basePath }}/homeAdmin" class="logo">
+                        <span class="logo-art">Art</span><span class="logo-let">let</span>
+                    </a>
+                {% else %}
+                    <a href="{{ basePath }}/home" class="logo">
+                        <span class="logo-art">Art</span><span class="logo-let">let</span>
+                    </a>
+                {% endif %}
+            </h1>
+
+            <div style="display: flex; gap: 10px; align-items: center;">
+
+                {% if user %}
+
+                    <a href="{{ basePath }}/membership"
+                       style="
+                            background: white;
+                            color: #2d2d2d;
+                            padding: 6px 12px;
+                            border-radius: 5px;
+                            text-decoration: none;
+                            font-weight: 600;
+                       ">
+                        Premium
+                    </a>
+
+                    <a href="{{ basePath }}/profile"
+                       style="
+                            background: white;
+                            color: #2d2d2d;
+                            padding: 6px 6px;
+                            border-radius: 50%;
+                            text-decoration: none;
+                       ">
+                        👤
+                    </a>
+
+                {% else %}
+
+                    <a href="{{ basePath }}/login"
+                       style="
+                            background: white;
+                            color: #2d2d2d;
+                            padding: 6px 12px;
+                            border-radius: 5px;
+                            text-decoration: none;
+                       ">
+                        Login
+                    </a>
+
+                    <a href="{{ basePath }}/register"
+                       style="
+                            border: 1px solid white;
+                            color: #2d2d2d;
+                            padding: 6px 12px;
+                            border-radius: 5px;
+                            text-decoration: none;
+                       ">
+                        Sign Up 
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+    </nav>
+</header>
+
+<main>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2026 Artlet - ECommerce Winter 2026</p>
+    </div>
+</footer>
+
+{% block javascript %}{% endblock %}
+
+</body>
+</html>

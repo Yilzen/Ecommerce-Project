@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profile Update - Artlet{% endblock %}
+
+{% block content %}
+
+<div class="profile-update-container">
+
+    <h1>Update Profile</h1>
+
+    {# Flash messages #}
+    {% if error %}
+        <div class="alert alert-error">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    {% if success %}
+        <div class="alert alert-success">
+            {{ success }}
+        </div>
+    {% endif %}
+
+    <form method="POST" action="{{ basePath }}/profile/update">
+
+        {# Username #}
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input 
+                type="text" 
+                id="username" 
+                name="username" 
+                value="{{ user.username|default('') }}" 
+                required
+            >
+        </div>
+
+        {# Email #}
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                value="{{ user.email|default('') }}" 
+                required
+            >
+        </div>
+
+        {# Optional password change #}
+        <div class="form-group">
+            <label for="password">New Password (optional)</label>
+            <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                placeholder="Leave blank to keep current password"
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="confirm_password">Confirm Password</label>
+            <input 
+                type="password" 
+                id="confirm_password" 
+                name="confirm_password"
+            >
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Update Profile
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

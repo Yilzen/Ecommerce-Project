@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Membership - Artlet{% endblock %}
+
+{% block content %}
+
+<div style="max-width:900px; margin:40px auto; display:flex; gap:20px; justify-content:center;">
+
+    {# FREE PLAN #}
+    <div style="flex:1; border:1px solid #ddd; border-radius:10px; padding:20px; background:white; text-align:center;">
+
+        <h2>Free Plan</h2>
+
+        <h3 style="color:green;">$0</h3>
+
+        <p>Daily download limit:</p>
+        <h2>5</h2>
+
+        <p style="color:#666;">Basic access to artworks</p>
+
+        {% if user.membership_status == 'free' %}
+            <button disabled
+                    style="margin-top:20px; padding:10px 15px; background:#ccc; color:#666; border:none; border-radius:5px; cursor:not-allowed;">
+                Current Plan
+            </button>
+        {% else %}
+            <form method="POST" action="{{ basePath }}/membership/free">
+                <button type="submit"
+                        style="margin-top:20px; padding:10px 15px; background:orchid; color:white; border:none; border-radius:5px;">
+                    Switch to Free
+                </button>
+            </form>
+        {% endif %}
+
+    </div>
+
+    {# PREMIUM PLAN #}
+    <div style="flex:1; border:2px solid orchid; border-radius:10px; padding:20px; background:white; text-align:center;">
+
+        <h2>Premium Plan</h2>
+
+        <h3 style="color:green;">$1.99</h3>
+
+        <p>Daily download limit:</p>
+        <h2>20</h2>
+
+        <p style="color:#666;">Full access + premium features</p>
+
+        {% if user.membership_status == 'premium' %}
+            <button disabled
+                    style="margin-top:20px; padding:10px 15px; background:#ccc; color:#666; border:none; border-radius:5px; cursor:not-allowed;">
+                Current Plan
+            </button>
+        {% else %}
+            <form method="POST" action="{{ basePath }}/membership/premium">
+                <button type="submit"
+                        style="margin-top:20px; padding:10px 15px; background:orchid; color:black; border:none; border-radius:5px;">
+                    Upgrade to Premium
+                </button>
+            </form>
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

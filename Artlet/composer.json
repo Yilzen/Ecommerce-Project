@@ -1,0 +1,28 @@
+{
+    "name": "rnegr/artlet",
+    "description": "A website to publish art.",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "require": {
+        "gabordemooij/redbean": "^5.7",
+        "slim/slim": "4.12",
+        "slim/psr7": "1.7",
+        "twig/twig": "3.14",
+        "php-di/php-di": "7.0",
+        "robthree/twofactorauth": "^3.0",
+        "symfony/translation": "^6.4",
+        "bacon/bacon-qr-code": "^3.1"
+    },
+    "config": {
+        "platform": {
+            "php": "8.3.19"
+        },
+        "audit": {
+            "ignore": ["PKSA-q85h-412r-2kwq"],
+            "block-insecure": false
+        }
+    }
+}

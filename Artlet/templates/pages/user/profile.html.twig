@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profile - Artlet{% endblock %}
+
+{% block content %}
+
+<div class="profile-container">
+
+    {% if error %}
+        <div class="alert-error">{{ error }}</div>
+    {% endif %}
+
+    {% if success %}
+        <div class="alert-success">{{ success }}</div>
+    {% endif %}
+
+    <div class="profile-header">
+
+        <img class="profile-avatar"
+             src="{{ basePath }}/uploads/{{ user.profile_image ?? 'default.png' }}"
+             alt="Profile picture">
+
+        <div class="profile-info">
+
+            <div class="profile-top">
+                <h2 class="username">{{ user.username }}</h2>
+
+                <div class="profile-actions">
+                    <a href="{{ basePath }}/profile/update" class="btn btn-primary">Edit Profile</a>
+                    <a href="{{ basePath }}/logout" class="btn btn-danger">Logout</a>
+                </div>
+            </div>
+
+            <div class="profile-bio">
+                <p>{{ user.bio ?? 'No bio yet.' }}</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="art-section">
+
+        <h3>Your Artworks</h3>
+
+        {% if artworks is empty %}
+
+            <p>No artworks yet.</p>
+
+            <a href="{{ basePath }}/art/upload"
+            style="display:inline-block; margin-top:15px; padding:10px 15px; background:orchid; color:white; text-decoration:none; border-radius:5px;">
+                Upload your first artwork
+            </a>
+
+        {% else %}
+            {% for art in artworks %}
+                <div class="art-card">
+                    <h4>{{ art.title }}</h4>
+                    <p>{{ art.description }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+    </div>
+
+    <div class="profile-bottom" style="margin-top: 80px;">
+
+        <div class="profile-actions">
+
+            {% if user.username != 'admin' %}
+
+                <a href="{{ basePath }}/profile/delete"
+                class="btn btn-danger"
+                style="display:inline-block; margin-top: 40px;">
+                    Delete Profile
+                </a>
+
+            {% else %}
+
+                <p style="color: gray; margin-top: 40px;">
+                    Admin accounts cannot be deleted.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
